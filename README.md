@@ -4,6 +4,18 @@ This repository demonstrates a modern DevOps workflow for building, containerizi
 
 ---
 
+## CI/CD Workflow Overview
+
+![CI/CD Workflow](Images/CI%20Workflow.PNG)
+
+---
+
+## Final Hosted Site Example
+
+![Final Hosted Site Screenshot](Images/HostedSite.PNG)
+
+---
+
 ## Key Components
 - **Azure Pipelines**: Automates build, containerization, and deployment steps.
 - **Docker**: Multi-stage build for efficient, production-ready images.
