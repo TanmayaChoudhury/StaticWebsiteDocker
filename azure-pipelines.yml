@@ -1,0 +1,64 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'db794667-4634-9cbf-95be1d0cb1d0'
+  imageRepository: 'portfolioweiner'
+  containerRegistry: 'containerregnmay.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Azure subscription 1(85f9051c-3d5f-4da3-c9b51169)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: 'az acr login --name=$(containerRegistry)'
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'Azure subscription 1(85f9051c-3d5f-4da39b51169)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az container create \
+                    --name portfolio-website \
+                    --resource-group SelfHostedAgents \
+                    --image $(containerRegistry)/$(imageRepository):$(tag) \
+                    --registry-login-server $(containerRegistry) \
+                    --registry-username XXXXXXX  \
+                    --registry-password XXXXXX \
+                    --dns-name-label portfolio15website150602$(tag) \
+                    --os-type Linux \
+                    --cpu 1 --memory 1.5 \
+                    --ports 80

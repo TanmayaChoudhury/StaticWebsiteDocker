@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certifications - DevOps Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Animate.css for quick animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    .bg-watermark {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.07;
+      background: url('images/kubernetes.png') 10% 20%/120px no-repeat,
+                  url('images/docker.png') 80% 60%/100px no-repeat,
+                  url('images/ansible.png') 60% 10%/90px no-repeat,
+                  url('images/terraform.png') 30% 70%/110px no-repeat;
+      filter: blur(1px);
+    }
+    @media (max-width: 640px) {
+      .bg-watermark {
+        background-size: 60px, 45px, 55px, 50px;
+        background-position: 5% 10%, 70% 5%, 20% 60%, 60% 80%;
+      }
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    main {
+      flex: 1 0 auto;
+    }
+    footer {
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body class="dark bg-gradient-to-br from-gray-900 via-gray-800 to-blue-900 text-gray-100 relative overflow-x-hidden">
+
+  <div class="bg-watermark"></div>
+
+  <header class="bg-blue-600 dark:bg-gray-800 p-4 text-white shadow-lg animate__animated animate__fadeInDown sticky top-0 z-10">
+    <h1 class="text-3xl font-bold animate__animated animate__fadeInLeft">Certifications</h1>
+  </header>
+
+  <nav class="w-full bg-gray-800 bg-opacity-90 py-4 px-6 flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-6 shadow-lg z-10">
+    <a href="index.html" class="text-gray-100 hover:text-blue-400 font-semibold transition">Home</a>
+    <a href="projects.html" class="text-gray-100 hover:text-blue-400 font-semibold transition">Projects</a>
+    <a href="skills.html" class="text-gray-100 hover:text-blue-400 font-semibold transition">Skills</a>
+    <a href="certifications.html" class="text-gray-100 hover:text-blue-400 font-semibold transition">Certifications</a>
+    <a href="contact.html" class="text-gray-100 hover:text-blue-400 font-semibold transition">Contact</a>
+  </nav>
+
+  <main class="p-4 sm:p-6 relative z-10">
+    <section id="certifications" class="mb-8">
+      <h2 class="text-2xl font-semibold mb-8 animate__animated animate__fadeInLeft">My Certifications</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-8">
+        <div class="bg-white bg-opacity-10 p-6 rounded-2xl shadow-xl text-gray-100 transform transition-transform duration-300 hover:scale-105 animate__animated animate__fadeInUp w-full">
+          <img src="images/az900.png" alt="Certification 1" class="w-full h-32 object-contain mb-4 rounded bg-white bg-opacity-20 p-2">
+          <h3 class="text-xl font-bold text-blue-300">Microsoft Certified: Azure Fundamentals</h3>
+          <p class="text-gray-300">Microsoft</p>
+        </div>
+        <div class="bg-white bg-opacity-10 p-6 rounded-2xl shadow-xl text-gray-100 transform transition-transform duration-300 hover:scale-105 animate__animated animate__fadeInUp animate__delay-1s w-full">
+          <img src="images/az104.png" alt="Certification 2" class="w-full h-32 object-contain mb-4 rounded bg-white bg-opacity-20 p-2">
+          <h3 class="text-xl font-bold text-blue-300">Microsoft Certified: Azure Administrator Associate</h3>
+          <p class="text-gray-300">Microsoft</p>
+        </div>
+        <div class="bg-white bg-opacity-10 p-6 rounded-2xl shadow-xl text-gray-100 transform transition-transform duration-300 hover:scale-105 animate__animated animate__fadeInUp animate__delay-2s w-full">
+          <img src="images/terraformca.png" alt="Certification 3" class="w-full h-32 object-contain mb-4 rounded bg-white bg-opacity-20 p-2">
+          <h3 class="text-xl font-bold text-blue-300">HashiCorp Certified: Terraform Associate</h3>
+          <p class="text-gray-300">HashiCorp</p>
+        </div>
+        <!-- Add more certifications as needed, increment animate__delay-Xs for staggered animation -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-blue-600 dark:bg-gray-800 p-4 text-white text-center shadow-lg animate__animated animate__fadeInUp">
+    <p>&copy; 2025 Tanmaya Choudhury. All rights reserved..</p>
+  </footer>
+
+  <script>
+    // Reveal certification cards on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate__fadeInUp');
+          entry.target.classList.remove('opacity-0');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.grid > div').forEach(card => {
+      card.classList.add('opacity-0');
+      observer.observe(card);
+    });
+  </script>
+</body>
+</html>
