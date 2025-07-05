@@ -27,10 +27,10 @@ This repository demonstrates a modern DevOps workflow for building, containerizi
 
 ## CI/CD Pipeline Overview
 
-### 1. Build Stage
-- Installs Node.js dependencies (for asset build tools like Tailwind CSS).
-- Runs the build process to generate static assets.
-- Builds a Docker image using a multi-stage Dockerfile.
+### 1. Build Stage: Secure Authentication
+- Authenticate with ACR inside your CI/CD pipeline
+- Avoid hardcoding credentials
+- Enables seamless docker push and docker pull operations in later pipeline steps
 
 ### 2. Push Stage
 - Authenticates to Azure Container Registry (ACR) using a secure service connection.
